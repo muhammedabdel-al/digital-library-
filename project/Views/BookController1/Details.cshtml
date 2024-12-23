@@ -1,0 +1,246 @@
+﻿@model project.Models.Author
+
+@{
+    ViewData["Title"] = "Author Profile";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Author Profile</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="~/NiceAdmin2/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/NiceAdmin2/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/NiceAdmin2/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/NiceAdmin2/assets/css/style.css" rel="stylesheet">
+
+    <style>
+        /* Custom Styling for the Profile Section */
+        .profile {
+            margin-top: 50px;
+        }
+
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #343a40;
+            margin-bottom: 30px;
+        }
+
+        .profile-overview h5 {
+            color: #495057;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+
+        .profile-overview .label {
+            font-weight: bold;
+            color: #6c757d;
+        }
+
+        .small.fst-italic {
+            font-style: italic;
+            color: #6c757d;
+        }
+
+        /* Books Section */
+        .books .card-title {
+            font-size: 18px;
+            color: #343a40;
+            font-weight: bold;
+        }
+
+        .books .card-text {
+            color: #6c757d;
+        }
+
+        .books .card-body {
+            padding: 15px;
+        }
+
+        .books img {
+            border-radius: 5px;
+        }
+
+        /* Buy Button */
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+        .no-books-message {
+            text-align: center;
+            color: #6c757d;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+
+        /* Header Section Styling */
+        .navbar {
+            background-color: #007bff;
+            padding: 15px;
+        }
+
+        .navbar .navbar-brand {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            margin-right: 30px;
+        }
+
+        .navbar .nav-link {
+            color: white;
+            font-size: 18px;
+            margin-right: 20px;
+        }
+
+        .navbar .nav-link:hover {
+            color: #e0e0e0;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">Library System</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Books">Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Authors">Authors</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Contact">Contact Us</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Author Profile Section -->
+    <section class="section profile">
+        <div class="container">
+            <h1>Author Profile</h1>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+
+                    <div class="card">
+                        <div class="card-body pt-3">
+                            <!-- Bordered Tabs -->
+                            <ul class="nav nav-tabs nav-tabs-bordered">
+                                <li class="nav-item">
+                                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#profile-overview">Overview</button>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content pt-2">
+                                <!-- Author Overview -->
+                                <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                                    <h5 class="card-title">About the Author</h5>
+                                    <p class="small fst-italic">@Model.Discription</p>
+
+                                    <h5 class="card-title">Author Details</h5>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Full Name</div>
+                                        <div class="col-lg-9 col-md-8">@Model.Name</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Email</div>
+                                        <div class="col-lg-9 col-md-8">@Model.Email</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Phone</div>
+                                        <div class="col-lg-9 col-md-8">@Model.PhoneNumber</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Age</div>
+                                        <div class="col-lg-9 col-md-8">@Model.Age</div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-4 label">Role</div>
+                                        <div class="col-lg-9 col-md-8">@Model.Role</div>
+                                    </div>
+                                </div>
+                            </div><!-- End Bordered Tabs -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Books by Author Section -->
+    <section class="section books mt-4">
+        <div class="container">
+            <div class="card">
+                <div class="card-body pt-3">
+                    <h5 class="card-title">Books by @Model.Name</h5>
+                    @if (Model.Books != null && Model.Books.Any())
+                    {
+                            <div class="row">
+                            @foreach (var item in Model.Books)
+                            {
+                                        <div class="col-md-4 mb-3">
+                                            <div class="card book-card">
+                                                <img class="card-img-top" src="~/images/@item.imgfile" alt="@item.Title" style="height: 250px; object-fit: cover;">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">@item.Title</h5>
+                                                    <p class="card-text">Category: @item.Category</p>
+                                                    <p class="card-text">Price: @item.Price $</p>
+                                                    <a asp-controller="UserBooks" asp-action="Create" asp-route-id="@item.BookId" class="btn btn-primary">Buy</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                            }
+                            }
+                            </div>
+                    }
+                    else
+                    {
+                            <p class="no-books-message">This author has no books listed.</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vendor JS Files -->
+    <script src="~/NiceAdmin2/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/NiceAdmin2/assets/js/main.js"></script>
+
+</body>
+
+</html>

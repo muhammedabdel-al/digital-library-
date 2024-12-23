@@ -1,0 +1,188 @@
+﻿@model IEnumerable<project.Models.Author>
+
+@{
+    ViewData["Title"] = "Authors";
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Authors</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="~/NiceAdmin2/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/NiceAdmin2/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/NiceAdmin2/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/NiceAdmin2/assets/css/style.css" rel="stylesheet">
+
+    <style>
+        /* Enhance header appearance */
+        .header {
+            background-color: #343a40;
+            padding: 10px 20px;
+        }
+
+        .header .logo h2 {
+            color: #fff;
+        }
+
+        .header .nav-buttons a {
+            color: #fff;
+            margin-right: 20px;
+        }
+
+        /* Enhance section title */
+        .books-title {
+            text-align: center;
+            margin: 30px 0;
+            font-size: 36px;
+            font-weight: 700;
+            color: #343a40;
+        }
+
+        /* Book card styling */
+        .book-card {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .book-card:hover {
+            transform: scale(1.05);
+        }
+
+        .book-card img {
+            height: 230px;
+            object-fit: cover;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .card-text {
+            margin-bottom: 10px;
+        }
+
+        /* Action buttons styling */
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn-group a {
+            flex-grow: 1;
+            margin: 0 5px;
+        }
+
+        .btn-create {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+    </style>
+</head>
+<header id="header" class="header fixed-top d-flex align-items-center">
+    <div class="d-flex align-items-center justify-content-between w-100">
+        <div class="logo">
+            <h2>Library</h2>
+        </div>
+        <div class="nav-buttons">
+            <a asp-controller="BookController1" asp-action="catalogue" class="btn btn-outline-light">Books</a>
+            <a asp-controller="Authors" asp-action="Index" class="btn btn-outline-light">Authors</a>
+            <a asp-controller="UserBooks" asp-action="Myorders" class="btn btn-light">My Orders</a>
+        </div>
+    </div>
+</header>
+<body  style="margin-top: 90px;>
+
+    <!-- Content Section -->
+    <div class="container mt-4">
+        <h1 class="text-center">Authors</h1>
+
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <input type="text" id="authorSearchInput" class="form-control" placeholder="Search by author name...">
+        </div>
+
+        <!-- Authors Table -->
+        <table class="table table-bordered table-hover" id="authorTable">
+            <thead class="thead-light">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.First().Name)</th>
+                    <th>@Html.DisplayNameFor(model => model.First().Email)</th>
+                    <th>@Html.DisplayNameFor(model => model.First().PhoneNumber)</th>
+                    <th>@Html.DisplayNameFor(model => model.First().Role)</th>
+                    <th>@Html.DisplayNameFor(model => model.First().Age)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                            <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Role)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Age)</td>
+                            <td>
+                                <a asp-action="Details" asp-route-id="@item.ID" class="btn btn-sm btn-primary">Details</a>
+                            </td>
+                        </tr>
+                }
+            </tbody>
+        </table>
+
+        @if (!Model.Any())
+        {
+                <p class="no-authors-message">No authors available.</p>
+        }
+    </div>
+
+    <!-- Vendor JS Files -->
+    <script src="~/NiceAdmin2/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/NiceAdmin2/assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="~/NiceAdmin2/assets/js/main.js"></script>
+
+    <!-- Search Script -->
+    <script>
+        document.getElementById("authorSearchInput").addEventListener("keyup", function() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("authorSearchInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("authorTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 1; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0]; // Index 0 corresponds to author name column
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>

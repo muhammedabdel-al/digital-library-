@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "target": "es2015",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "lib": [ "es2015", "dom" ],
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "*": [ "node_modules/*", "wwwroot/NiceAdmin2/assets/vendor/*", "src/types/*" ]
+    },
+    "typeRoots": [ "./node_modules/@types", "./src/types" ]
+  },
+  "include": [
+    "wwwroot/**/*.ts",
+    "wwwroot/**/*.d.ts",
+    "src/types/**/*.d.ts"
+  ]
+}
